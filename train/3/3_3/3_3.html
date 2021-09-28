@@ -1,0 +1,25 @@
+<script>
+
+    function countBs(str) {
+        let counter = 0;
+        for (let i = 0; i < str.length; i++) {
+            if (str.charAt(i) == 'B')
+                counter++;
+        }
+        return counter;
+    }
+    
+    console.log(countBs('BbBBtr'));
+    
+    function countChar(str, chr) {
+        let counter = 0;
+        for (let i = 0; i < str.length; i++) {
+            if (str.charAt(i) == chr)
+                counter++;
+        }
+        return counter;
+    }
+    
+    console.log(countChar('BbBBtr', 't'));
+
+</script>

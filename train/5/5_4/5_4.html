@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+    
+    <script>
+        // Ваш код тут
+        function every(array, func) {
+            let bool;
+            for (let i = 0; i < array.length; i++) {
+                if (!func(array[i])) 
+                    return false;
+                else 
+                    bool = true;
+            }
+            return bool;
+        }
+        
+        function some(array, func) {
+            let bool;
+            for (let i = 0; i < array.length; i++) {
+                if (func(array[i])) 
+                    return true;
+                else 
+                    bool = false;
+            }
+            return bool;    
+        }
+
+        console.log(every([NaN, NaN, NaN], isNaN));
+        // → true
+        console.log(every([NaN, NaN, 4], isNaN));
+        // → false
+        console.log(some([NaN, 3, 4], isNaN));
+        // → true
+        console.log(some([2, 3, 4], isNaN));
+        // → false
+    </script>    
+    
+</body>
+</html>

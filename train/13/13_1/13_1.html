@@ -1,0 +1,75 @@
+<canvas width="1500" height="500"></canvas>
+<script>
+
+    let cx = document.querySelector("canvas").getContext("2d");
+    // Ваш код
+    function trapezoid() {
+        cx.beginPath();
+        cx.moveTo(50, 0);
+        cx.lineTo(0, 100);
+        cx.lineTo(200, 100);
+        cx.lineTo(150, 0);
+        cx.closePath();
+        cx.stroke();    
+    }
+    
+    function rhombus() {
+        cx.beginPath();
+        cx.moveTo(350, 0);
+        cx.lineTo(450, 75);
+        cx.lineTo(350, 150);
+        cx.lineTo(250, 75);
+        cx.closePath();
+        cx.fillStyle = "red";
+        cx.fill();
+    }
+    
+    function zigzag() {
+        cx.beginPath();
+        cx.moveTo(500, 0);
+        cx.lineTo(700, 10);
+        cx.lineTo(500, 20);
+        cx.lineTo(700, 35);
+        cx.lineTo(500, 40);
+        cx.lineTo(700, 50);
+        cx.lineTo(500, 60);
+        cx.lineTo(700, 70);
+        cx.lineTo(500, 80);
+        cx.lineTo(700, 90);
+        cx.lineTo(500, 100);
+        cx.lineTo(700, 110);
+        cx.lineTo(500, 120);
+        cx.stroke();
+    }
+    
+    function spiral() {
+        let rad = 50;
+        cx.beginPath();
+        cx.moveTo(850, 70);
+        for (let i = 0; i < 360; i++) {
+            let angle = i * Math.PI / 30;
+            let dist = rad * i / 300;
+            cx.lineTo(850 + Math.cos(angle) * dist, 70 + Math.sin(angle) * dist);
+        }
+        cx.stroke();
+    }
+    
+    function sun() {
+        let rad = 50;
+        cx.beginPath();
+        cx.moveTo(1050, 70);
+        for (let i = 0; i <= 8; i++) {
+            let angle = i * Math.PI / 4;
+            cx.quadraticCurveTo(1050, 70, 1050 + Math.cos(angle) * rad, 70 + Math.sin(angle) * rad);
+        }
+        cx.fillStyle = "yellow";
+        cx.fill();
+    }
+    
+    trapezoid();
+    rhombus();
+    zigzag();
+    spiral();
+    sun();
+    
+</script>

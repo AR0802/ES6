@@ -1,0 +1,50 @@
+–егул€рный гольф
+Ђ√ольфомї в коде называют игру, где нужно выразить заданную программу минимальным количеством символов. –егул€рный гольф Ц практическое упражнение по написанию наименьших возможных 
+регул€рок дл€ поиска заданного шаблона, и только его.
+ƒл€ каждой из подстрочек напишите регул€рку дл€ проверки их нахождени€ в строке. –егул€рка должна находить только эти указанные подстроки. Ќе волнуйтесь насчЄт границ слов, если это не 
+упом€нуто особо.  огда у вас получитс€ работающа€ регул€рка, попробуйте еЄ уменьшить.
+Ч car и cat Ч pop и prop Ч ferret, ferry, и ferrari Ч Ћюбое слово, заканчивающеес€ на ious Ч ѕробел, за которым идЄт точка, зап€та€, двоеточие или точка с зап€той. Ч —лово длинее шести 
+букв Ч —лово без букв e
+
+// ¬пишите свои регул€рки
+
+verify(/.../,
+       ["my car", "bad cats"],
+       ["camper", "high art"]);
+
+verify(/.../,
+       ["pop culture", "mad props"],
+       ["plop"]);
+
+verify(/.../,
+       ["ferret", "ferry", "ferrari"],
+       ["ferrum", "transfer A"]);
+
+verify(/.../,
+       ["how delicious", "spacious room"],
+       ["ruinous", "consciousness"]);
+
+verify(/.../,
+       ["bad punctuation ."],
+       ["escape the dot"]);
+
+verify(/.../,
+       ["hottentottententen"],
+       ["no", "hotten totten tenten"]);
+
+verify(/.../,
+       ["red platypus", "wobbling nest"],
+       ["earth bed", "learning ape"]);
+
+function verify(regexp, yes, no) {
+  // Ignore unfinished exercises
+  if (regexp.source == "...") return;
+  yes.forEach(function(s) {
+    if (!regexp.test(s))
+      console.log("Ќе нашлось '" + s + "'");
+  });
+  no.forEach(function(s) {
+    if (regexp.test(s))
+      console.log("Ќеожиданное вхождение '" + s + "'");
+  });
+}

@@ -1,0 +1,48 @@
+<script>
+
+    /*function deepEqual(arg1, arg2) {
+        if (typeof arg1 == 'object' && typeof arg2 == 'object' && arg1 !== null && arg2 !== null) {
+            var argArr11 = [], argArr12 = [], argArr21 = [], argArr22 = [];
+            for (let prop in arg1) {
+                argArr11.push(prop);
+                argArr12.push(arg1[prop]);
+            }
+            for (let prop in arg2) {
+                argArr21.push(prop);
+                argArr22.push(arg2[prop]);
+            }
+            return (JSON.stringify(argArr11) == JSON.stringify(argArr21) && JSON.stringify(argArr12) == JSON.stringify(argArr22));
+        }
+        else {
+            return arg1 === arg2;
+        }
+    }*/
+    
+    function deepEqual(arg1, arg2) {
+       if (typeof arg1 == 'object' && typeof arg2 == 'object' && arg1 !== null && arg2 !== null) {
+            if (Object.keys(arg1).length !== Object.keys(arg2).length)
+                return false;
+           
+            for (let prop in arg1) {
+                if (!arg2[prop]) 
+                    return false;
+                else if (!deepEqual(arg1[prop], arg2[prop]))
+                    return false;
+            }
+            
+            return true;
+       }
+       else {
+            return arg1 === arg2;
+        }
+    }
+    
+    var obj = {here: {is: "an"}, object: 2};
+    console.log(deepEqual(obj, obj));
+    // → true
+    console.log(deepEqual(obj, {here: 1, object: 2}));
+    // → false
+    console.log(deepEqual(obj, {here: {is: "an"}, object: 2}));
+    // → true
+
+</script>

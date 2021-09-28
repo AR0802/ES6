@@ -1,0 +1,55 @@
+<input type="text" id="field">
+<div id="suggestions" style="cursor: pointer"></div>
+
+<script>
+    // Строит массив из имён глобальных перменных,
+    // типа  'alert', 'document', и 'scrollTo'
+    var terms = [];
+    for (var name in window)
+        terms.push(name);
+
+    // Ваш код.
+    const div = document.querySelector("#suggestions");
+    const input = document.querySelector("input"); 
+    
+    let count = 0;
+    let str = "";
+    
+    function list() {
+        if (div.childNodes[0] != null) {
+            div.removeChild(div.childNodes[0]);
+        }
+        
+        let pr = document.createElement("div");
+        for (let name of terms) { 
+            if (name.slice(0, count) === str) {
+                let cur = document.createElement("div");
+                cur.innerHTML = name;
+                pr.appendChild(cur);
+            }
+        }
+        div.appendChild(pr);
+    }
+    
+    input.addEventListener("keypress", function(event) {
+        count++;
+        str += String.fromCharCode(event.charCode);
+        list();
+    });
+    
+    input.addEventListener("keydown", function(event) {
+        if (event.keyCode == 8) {
+            str = str.slice(0, -1);
+            count--;
+            list();
+        }    
+    });
+    
+    div.addEventListener("click", (event) => {
+        input.value = event.target.textContent;
+        str = event.target.textContent;
+        count = str.length;
+        list();
+    });
+    
+</script>

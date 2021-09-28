@@ -1,0 +1,58 @@
+<script>
+    
+    function arrayToList(arr) {
+        let obj = null;
+        for (let i = arr.length - 1; i >= 0; i--) {
+            obj = {
+                value: arr[i],
+                rest: obj
+            };
+        }
+        return obj;
+    }
+    
+    function listToArray(list) {
+        let arr = [];
+        do {
+            arr.push(list.value);
+            list = list.rest;
+        } while (list != null)
+        return arr;
+    }
+    
+    function prepend(n, obj) {
+        const newObj = {
+            value: n,
+            rest: obj
+        };
+        return newObj;
+    }
+    
+    /*function nth(list, n) {
+        let arr = [];
+        do {
+            arr.push(list.value);
+            list = list.rest;
+        } while (list != null)
+        return arr[n];
+    }*/
+    
+    function nth(list, n) {
+        if (!list) 
+            return undefined;
+        else if (n == 0)
+            return list.value;
+        else 
+            return nth(list.rest, n - 1);
+    }
+    
+    console.log(arrayToList([10, 20]));
+    // → {value: 10, rest: {value: 20, rest: null}}
+    console.log(listToArray(arrayToList([10, 20, 30])));
+    // → [10, 20, 30]
+    console.log(prepend(10, prepend(20, null)));
+    // → {value: 10, rest: {value: 20, rest: null}}
+    console.log(nth(arrayToList([10, 20, 30]), 1));
+    // → 20
+
+</script>

@@ -1,0 +1,29 @@
+<script>
+
+    function range(from, to, step = 1) {
+        let arr = [];
+        if (step < 0) {
+            for (let i = from; i >= to; i += step) {
+                arr.push(i);
+            }   
+        }
+        else {
+            for (let i = from; i <= to; i += step) {
+                arr.push(i);
+            } 
+        }
+        return arr;
+    }
+    
+    function sum(array) {
+        let sum = 0;
+        for (let i = 0; i < array.length; i++) {
+            sum += array[i];
+        }
+        return sum;
+    }
+    
+    console.log(sum(range(1, 10)));
+    console.log(range(5, 2, -1));
+
+</script>

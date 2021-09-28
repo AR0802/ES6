@@ -1,0 +1,29 @@
+<script>
+
+    function isEven(arg) {
+        if (arg >= 0) {
+            if (arg == 0)
+                return true;
+            else if (arg == 1) 
+                return false;
+            else 
+                return isEven(arg - 2); 
+        }
+        else {
+            if (arg == 0)
+                return true;
+            else if (arg == -1) 
+                return false;
+            else 
+                return isEven(arg + 2); 
+        }
+    }
+    
+    console.log(isEven(50));
+    // → true
+    console.log(isEven(75));
+    // → false
+    console.log(isEven(-1));
+    // → ??
+
+</script>

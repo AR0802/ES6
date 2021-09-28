@@ -1,0 +1,17 @@
+<textarea id="code">return "hi";</textarea>
+<button id="button">Поехали</button>
+<pre id="output"></pre>
+
+<script>
+    // Ваш код.
+    document.querySelector("button").addEventListener("click", () => {
+        let code = document.querySelector("#code").textContent;
+        let output = document.querySelector("#output");
+        try {
+            output.innerHTML = new Function(code)();
+        }
+        catch(err) {
+            output.innerHTML = "Error" + err;
+        }
+    });
+</script>

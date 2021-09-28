@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+    <style>
+      .trail { /* className для элементов, летящих за курсором */
+        position: absolute;
+        height: 6px; width: 6px;
+        border-radius: 3px;
+        background: teal;
+      }
+      body {
+        height: 300px;
+      }
+    </style>
+    
+    <script>
+        // Ваш код.
+        let points = [];
+        for (let i = 0; i < 10; i++) {
+            let node = document.createElement("div");
+            node.className = "trail";
+            document.body.appendChild(node);
+            points.push(node);
+        }
+        let currentPoint = 0;
+
+        window.addEventListener("mousemove", function(event) {
+            let point = points[currentPoint];
+            point.style.left = event.pageX + "px";
+            point.style.top = event.pageY + "px";
+            currentPoint = (currentPoint + 1) % points.length;
+        });
+    </script>
+</body>
+</html>

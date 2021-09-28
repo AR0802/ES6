@@ -1,0 +1,62 @@
+<div id="grid"></div>
+<button id="next">Следующее поколение</button>
+
+<script>
+    // Ваш код.
+    const width = 3, height = 3;
+    let code = "";
+    code += "<table>";
+    for (let i = 0; i < width; i++) {
+        code += "<tr>";
+        for (let j = 0; j < height; j++) {
+            code += "<td><button onclick='change("+i+','+j+")' style='width: 30px; height: 30px' id="+i+','+j+"></button></td>";
+        }
+        code += "</tr>";
+    }
+    code += "</table>";
+    document.getElementById("grid").innerHTML = code;
+    
+    function change(i,j) {
+        if (document.getElementById(i+','+j).style.border == 'none')
+            document.getElementById(i+','+j).style.border = '3px solid black';
+        else 
+            document.getElementById(i+','+j).style.border = 'none';
+    }
+    
+    function check() {
+        for (let i = 0; i < width; i++) {
+            for (let j = 0; j < height; j++) {
+                let count = 0;
+                for (let k = i - 1; k <= i + 1; k++) {
+                    for (let l = j - 1; l <= j + 1; l++) { 
+                        if ((k != i || l != j) && document.getElementById(k + ',' + l) != null && document.getElementById(k + ',' + l).style.border == '3px solid black') {
+                            count++;
+                        }
+                    }
+                }
+                console.log(count);
+                let live = document.getElementById(i+','+j).style.border != 'none'; 
+                if (live == true && (count < 2 || count > 3)) 
+                    document.getElementById(i+','+j).style.border = 'none';
+                else if (live == true && (count == 2 || count == 3)) 
+                    document.getElementById(i+','+j).style.border = '3px solid black';
+                else if (live == false && count == 3) {
+                    document.getElementById(i+','+j).style.border = '3px solid black';
+                }
+            }
+        }
+    }
+    
+    function random() {
+        for (let i = 0; i < width; i++) {
+            for (let j = 0; j < height; j++) {
+                if (Math.random() < 0.5) 
+                    document.getElementById(i+','+j).style.border = 'none';
+                else 
+                    document.getElementById(i+','+j).style.border = '3px solid black';
+            }
+        }
+    }
+    random();
+    document.getElementById("next").addEventListener("click", check);
+</script>

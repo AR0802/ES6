@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+    <div id="wrapper">
+      <div data-tabname="one">Закладка один</div>
+      <div data-tabname="two">Закладка два</div>
+      <div data-tabname="three">Закладка три</div>
+    </div>
+    
+    <script>
+        function asTabs(node) {
+            // Ваш код.
+            let table = document.createElement("div");
+            let Arr = [];
+            for (let i = 0; i < node.childNodes.length; i++) {
+                let currNode = node.childNodes[i];
+                if (currNode.nodeType == 1) {
+                    let button = document.createElement("button");
+                    button.textContent = currNode.getAttribute("data-tabname");
+                    let obj = {currNode, button};
+                    Arr.push(obj);
+                    button.addEventListener("click", () => currentTable(obj));
+                    table.appendChild(button);
+                }
+            }
+            node.insertBefore(table, node.firstChild);
+            
+            function currentTable(table) {
+                for (let el of Arr) {
+                    let current = el == table;
+                    el.currNode.style.display = current ? "" : "none";
+                    el.button.style.color = current ? "green" : "";
+                }
+            }
+            currentTable(Arr[0]);
+        }
+        
+        asTabs(document.querySelector("#wrapper"));
+    </script>
+</body>
+</html>

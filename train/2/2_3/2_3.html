@@ -1,0 +1,17 @@
+<script>
+
+    const n = prompt('Введите размер доски: ');
+    let s = '';
+    
+    for (let i = 0; i < Number(n); i++) {
+        for (let j = 0; j < Number(n); j++) {
+            if ((i + j) % 2 == 0) 
+                s += '#';
+            else 
+                s += ' ';
+        }
+        s += '\n';
+    }
+    console.log(s);
+    
+</script>
