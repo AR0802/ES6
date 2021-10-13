@@ -1,0 +1,93 @@
+<div id="grid"></div>
+<button id="next">Следующее поколение</button>
+
+<script>
+    // Ваш код.
+    const width = 3, height = 3;
+    let code = "";
+    let boolArr = [], countArr = [];
+    
+    code += "<table>";
+    for (let i = 0; i < width; i++) {
+        code += "<tr>";
+        for (let j = 0; j < height; j++) {
+            code += "<td><input type='checkbox' onclick='changeArr("+i+','+j+")' style='width: 30px; height: 30px' id="+i+','+j+"></td>";
+        }
+        code += "</tr>";
+    }
+    code += "</table>";
+    document.getElementById("grid").innerHTML = code;
+    
+    function nextGen() {
+        
+        if (countArr[0] != null) {
+            for (let i = 0; i < width*height; i++) {
+                countArr.shift();
+            }
+        }
+        
+        function check() {
+            for (let i = 0; i < width; i++) {
+                for (let j = 0; j < height; j++) {
+                    let count = 0;
+                    for (let k = i - 1; k <= i + 1; k++) {
+                        for (let l = j - 1; l <= j + 1; l++) { 
+                            if (k >= 0 && l >= 0 && k < width && l < width) {
+                                let num = k * width + l;
+                                if (boolArr[num] === true  && (k !== i || l !== j)) {
+                                    count++;
+                                }
+                            } 
+                        }
+                    }
+                    countArr.push(count);
+                }
+            }
+        }
+    
+        function change() {      
+            for (let i = 0; i < width; i++) {
+                for (let j = 0; j < height; j++) {
+                    let cr = i * width + j;
+                    let live = boolArr[cr] === true; 
+                    if (live === true && (countArr[cr] < 2 || countArr[cr] > 3))
+                        boolArr[cr] = false; 
+                    else if ((live === true && (countArr[cr] === 2 || countArr[cr] === 3)) || (live === false && countArr[cr] === 3))
+                        boolArr[cr] = true;
+
+                    if (boolArr[cr] === true) 
+                        document.getElementById(i+','+j).checked = true;
+                    else 
+                        document.getElementById(i+','+j).checked = false;
+                }
+            }
+        }
+        
+        check();
+        change();
+    }
+    
+    function changeArr(i,j) {
+        let cr = i * width + j;
+        if (boolArr[cr])
+            boolArr[cr] = false;
+        else 
+            boolArr[cr] = true;
+    }
+    
+    function random() {
+        for (let i = 0; i < width; i++) {
+            for (let j = 0; j < height; j++) {
+                if (Math.random() < 0.5) {
+                    document.getElementById(i+','+j).checked = true;
+                    boolArr.push(true);
+                }
+                else 
+                    boolArr.push(false);
+            }
+        }
+    }
+    
+    random();
+    document.getElementById("next").addEventListener("click", nextGen);
+</script>
